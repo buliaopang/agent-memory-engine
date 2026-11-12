@@ -27,7 +27,7 @@
 
 本项目的 **Conflux Tree-Graph 主链共识机制**（最重子树 Pivot Chain 选举、基于 Past(p_i) 历史可达集的自动 Epoch 划分与确定性全序推导、冲突“先到者优先”消解建议）设计受区块链共识协议 **Conflux Tree-Graph** 启发，核心思想参考自以下论文：
 
-> **Chen et al., "Conflux: A Tree-Graph Protocol, Acting Recursively for Blockchains"**, Proceedings of the 2019 IEEE Symposium on Security and Privacy (S&P), pp. 104–121. arXiv: [1810.12638](https://arxiv.org/abs/1810.12638)
+> **Li et al., "Scaling Nakamoto Consensus to Thousands of Transactions per Second"**, arXiv: [1805.03870](https://arxiv.org/abs/1805.03870)
 
 具体映射关系与改造细节见 [docs/adr/ADR-033-conflux-tree-graph-consensus.md](docs/adr/ADR-033-conflux-tree-graph-consensus.md)。AME 为本地记忆引擎，与 Conflux 区块链项目无代码或组织关联。
 
