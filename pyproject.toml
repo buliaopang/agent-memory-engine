@@ -1,0 +1,56 @@
+[project]
+name = "agent-memory-engine"
+version = "0.1.0"
+description = "Local Agent Memory Engine (AME) - Windows-first, local-only"
+requires-python = ">=3.12"
+keywords = ["agent-memory", "llm", "mcp", "conflux", "tree-graph", "sqlite", "retrieval"]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "uvicorn>=0.30",
+  "pydantic>=2.7,<3",
+  "pydantic-settings>=2.3,<3",
+  "sqlalchemy>=2.0,<2.1",
+  "alembic>=1.13,<2",
+  "structlog>=24.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27", "ruff>=0.5", "mypy>=1.10"]
+# optional derived vector index + local ONNX embeddings (ADR-021, ADR-034); AME works fully without it
+vector = ["lancedb>=0.20", "pyarrow>=15", "fastembed>=0.4"]
+# optional MCP stdio adapter (ADR-028); AME core works fully without it
+mcp = ["mcp>=2.3,<3"]
+
+[project.scripts]
+ame-server = "ame.main:run"
+ame = "ame.cli:main"
+ame-mcp = "ame.adapters.mcp.server:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ame"]
+force-include = {"migrations" = "ame/_migrations"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["ame"]
+mypy_path = "src"
+
+# ADR-028: the MCP SDK is an optional extra; core type-checks without it installed.
+[[tool.mypy.overrides]]
+module = ["mcp", "mcp.*"]
+ignore_missing_imports = true

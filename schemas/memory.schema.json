@@ -1,0 +1,260 @@
+{
+  "$defs": {
+    "Layer": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ],
+      "title": "Layer",
+      "type": "string"
+    },
+    "MemoryStatus": {
+      "enum": [
+        "candidate",
+        "active",
+        "conflicted",
+        "superseded",
+        "archived",
+        "rejected"
+      ],
+      "title": "MemoryStatus",
+      "type": "string"
+    },
+    "MemoryType": {
+      "enum": [
+        "working",
+        "episodic",
+        "semantic",
+        "procedural"
+      ],
+      "title": "MemoryType",
+      "type": "string"
+    },
+    "ScopeType": {
+      "enum": [
+        "private",
+        "project",
+        "shared"
+      ],
+      "title": "ScopeType",
+      "type": "string"
+    },
+    "SourceRead": {
+      "additionalProperties": false,
+      "properties": {
+        "content_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Hash"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "excerpt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Excerpt"
+        },
+        "memory_id": {
+          "title": "Memory Id",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Ref"
+        },
+        "source_type": {
+          "$ref": "#/$defs/SourceType"
+        }
+      },
+      "required": [
+        "source_id",
+        "memory_id",
+        "source_type",
+        "source_ref",
+        "excerpt",
+        "content_hash",
+        "created_at",
+        "metadata"
+      ],
+      "title": "SourceRead",
+      "type": "object"
+    },
+    "SourceType": {
+      "enum": [
+        "conversation",
+        "file",
+        "task",
+        "manual",
+        "tool"
+      ],
+      "title": "SourceType",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "confidence": {
+      "title": "Confidence",
+      "type": "number"
+    },
+    "content": {
+      "title": "Content",
+      "type": "string"
+    },
+    "content_hash": {
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "created_by": {
+      "title": "Created By",
+      "type": "string"
+    },
+    "current_version": {
+      "title": "Current Version",
+      "type": "integer"
+    },
+    "importance": {
+      "title": "Importance",
+      "type": "number"
+    },
+    "layer": {
+      "$ref": "#/$defs/Layer"
+    },
+    "memory_id": {
+      "title": "Memory Id",
+      "type": "string"
+    },
+    "memory_type": {
+      "$ref": "#/$defs/MemoryType"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "parent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Parent Ids",
+      "type": "array"
+    },
+    "reference_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reference Ids",
+      "type": "array"
+    },
+    "scope_id": {
+      "title": "Scope Id",
+      "type": "string"
+    },
+    "scope_type": {
+      "$ref": "#/$defs/ScopeType"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceRead"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/MemoryStatus"
+    },
+    "summary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Summary"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "updated_at": {
+      "title": "Updated At",
+      "type": "string"
+    },
+    "vector_status": {
+      "default": "pending",
+      "title": "Vector Status",
+      "type": "string"
+    },
+    "version_id": {
+      "title": "Version Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "memory_id",
+    "current_version",
+    "version_id",
+    "content",
+    "summary",
+    "content_hash",
+    "memory_type",
+    "layer",
+    "scope_type",
+    "scope_id",
+    "created_by",
+    "created_at",
+    "updated_at",
+    "importance",
+    "confidence",
+    "status",
+    "tags",
+    "sources",
+    "parent_ids",
+    "reference_ids",
+    "metadata"
+  ],
+  "title": "MemoryRead",
+  "type": "object"
+}

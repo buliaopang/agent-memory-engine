@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "Layer": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ],
+      "title": "Layer",
+      "type": "string"
+    },
+    "MemoryType": {
+      "enum": [
+        "working",
+        "episodic",
+        "semantic",
+        "procedural"
+      ],
+      "title": "MemoryType",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "epoch_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Epoch Id"
+    },
+    "include_conflicts": {
+      "default": false,
+      "title": "Include Conflicts",
+      "type": "boolean"
+    },
+    "include_graph_context": {
+      "default": false,
+      "title": "Include Graph Context",
+      "type": "boolean"
+    },
+    "include_sources": {
+      "default": true,
+      "title": "Include Sources",
+      "type": "boolean"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/Layer"
+      },
+      "title": "Layers",
+      "type": "array"
+    },
+    "memory_types": {
+      "items": {
+        "$ref": "#/$defs/MemoryType"
+      },
+      "title": "Memory Types",
+      "type": "array"
+    },
+    "query": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Query",
+      "type": "string"
+    },
+    "scope_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Scope Ids",
+      "type": "array"
+    },
+    "top_k": {
+      "default": 10,
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Top K",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "query"
+  ],
+  "title": "SearchRequest",
+  "type": "object"
+}

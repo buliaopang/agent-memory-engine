@@ -1,0 +1,23 @@
+{
+  "description": "MCP tool contract (ADR-002). Field names must equal REST/DTO names. Implementation is Phase 3.",
+  "tools": {
+    "memory_write": {"input": ["content", "summary", "memory_type", "layer", "scope_type", "scope_id", "importance", "confidence", "tags", "parent_ids", "reference_ids", "sources", "metadata", "idempotency_key"], "output": "memory.schema.json"},
+    "memory_read": {"input": ["memory_id", "include_sources", "include_edges", "include_relations"], "output": "memory.schema.json"},
+    "memory_search": {"input": ["query", "scope_ids", "layers", "memory_types", "top_k", "include_graph_context", "include_sources", "include_conflicts"], "output": "search_result"},
+    "memory_create_version": {"input": ["memory_id", "content", "summary", "change_reason", "expected_version"], "output": "version.schema.json"},
+    "memory_link": {"input": ["from_memory_id", "to_memory_id", "edge_type", "metadata"], "output": "edge.schema.json"},
+    "memory_relate": {"input": ["from_memory_id", "to_memory_id", "relation_type", "metadata"], "output": "relation.schema.json"},
+    "memory_revoke_edge": {"input": ["edge_id", "reason"], "output": "edge.schema.json"},
+    "memory_revoke_relation": {"input": ["relation_id", "reason"], "output": "relation.schema.json"},
+    "memory_change_status": {"input": ["memory_id", "to_status", "reason", "superseded_by_memory_id"], "output": "memory.schema.json"},
+    "memory_change_classification": {"input": ["memory_id", "layer", "memory_type", "reason"], "output": "memory.schema.json"},
+    "memory_neighbors": {"input": ["memory_id", "edge_types", "relation_types", "direction", "depth", "limit", "include_revoked"], "output": "neighbors"},
+    "memory_get_context": {"input": ["task_description", "scope_ids", "layers", "memory_types", "token_budget", "include_procedural", "include_sources"], "output": "context"},
+    "memory_archive": {"input": ["memory_id", "reason"], "output": "memory.schema.json"},
+    "memory_feedback": {"input": ["memory_id", "feedback", "reason", "idempotency_key"], "output": "feedback"},
+    "memory_list_spaces": {"input": [], "output": "spaces"},
+    "memory_get_stats": {"input": [], "output": "stats"},
+    "memory_spine": {"input": ["scope_id", "epoch_id", "limit"], "output": "spine"},
+    "memory_list_epochs": {"input": [], "output": "epochs"}
+  }
+}

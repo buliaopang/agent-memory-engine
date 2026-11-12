@@ -1,0 +1,132 @@
+{
+  "$defs": {
+    "ActorType": {
+      "enum": [
+        "user",
+        "agent",
+        "system"
+      ],
+      "title": "ActorType",
+      "type": "string"
+    },
+    "EdgeType": {
+      "description": "Structural DAG edge types (cycle-checked).",
+      "enum": [
+        "PARENT",
+        "REFERENCE",
+        "SUPERSEDES",
+        "DERIVED_FROM"
+      ],
+      "title": "EdgeType",
+      "type": "string"
+    },
+    "LinkStatus": {
+      "description": "Lifecycle of structural edges and semantic relations (ADR-006).",
+      "enum": [
+        "active",
+        "revoked"
+      ],
+      "title": "LinkStatus",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created": {
+      "title": "Created",
+      "type": "boolean"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "created_by": {
+      "title": "Created By",
+      "type": "string"
+    },
+    "edge_id": {
+      "title": "Edge Id",
+      "type": "string"
+    },
+    "edge_type": {
+      "$ref": "#/$defs/EdgeType"
+    },
+    "from_memory_id": {
+      "title": "From Memory Id",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "revoked_actor_type": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ActorType"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "revoked_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Revoked At"
+    },
+    "revoked_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Revoked By"
+    },
+    "revoked_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Revoked Reason"
+    },
+    "status": {
+      "$ref": "#/$defs/LinkStatus"
+    },
+    "to_memory_id": {
+      "title": "To Memory Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "edge_id",
+    "from_memory_id",
+    "to_memory_id",
+    "edge_type",
+    "status",
+    "created_by",
+    "created_at",
+    "metadata",
+    "revoked_at",
+    "revoked_by",
+    "revoked_actor_type",
+    "revoked_reason",
+    "created"
+  ],
+  "title": "EdgeRead",
+  "type": "object"
+}
